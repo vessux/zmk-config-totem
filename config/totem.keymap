@@ -8,7 +8,33 @@
 //                                                             ▀▀▀▀▀    █  █  █      ▀
 //                                                                      ▀  ▀  ▀
 //
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// =================================================================================================
+// Magic Sturdy Layout Implementation for Totem Keyboard
+// =================================================================================================
+//
+// SPECIAL FEATURES:
+//
+// 1. MAGIC KEY (^)
+//    - Located at key position 6 (middle of top row, right half)
+//    - When pressed after another key, outputs a context-sensitive character or word
+//    - Uses the zmk-antecedent-morph behavior from https://github.com/ssbb/zmk-antecedent-morph
+//
+// 2. SMART REPEAT KEY
+//    - Located at key position 35 (left key of right thumb cluster)
+//    - Standard key repetition with intelligent context-aware overrides:
+//      * Letters like A, I, Y → common suffixes like ND, NG, OU
+//      * Common words like BECAUSE, WOULD when pressed after certain letters
+//      * Navigation, bracket/parenthesis, and quote pair smart handling
+//
+// MAGIC STURDY LAYOUT:
+// Top row:    V M L C P | B ^ U O ,
+// Home row:   S T R D Y | F N E A I
+// Bottom row: X K J G W | Z H ' ? .
+// Thumb keys: Space Tab / | @ Shift _
+//
+// Based on: https://github.com/Ikcelaks/keyboard_layouts/blob/main/magic_sturdy/magic_sturdy.md
+//
+// =================================================================================================
        
 
 #include <behaviors.dtsi>
@@ -16,10 +42,11 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
-#define BASE 0
-#define NAV  1
-#define SYM  2
-#define ADJ  3
+#define BASE  0
+#define BASE2 1
+#define NAV   2
+#define SYM   3
+#define ADJ   4
 
 &mt {
   quick-tap-ms = <100>;
@@ -29,6 +56,432 @@
 };
 
 / {
+    macros {
+        // =======================================
+        // === MAGIC KEY FUNCTIONALITY MACROS ====
+        // =======================================
+        
+        the_macro: the_macro {
+            label = "the_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp T &kp H &kp E>;
+        };
+
+        but_macro: but_macro {
+            label = "but_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp SPACE &kp B &kp U &kp T>;
+        };
+
+        before_macro: before_macro {
+            label = "before_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp B &kp E &kp F &kp O &kp R &kp E>;
+        };
+
+        ent_macro: ent_macro {
+            label = "ent_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp E &kp N &kp T>;
+        };
+
+        ion_macro: ion_macro {
+            label = "ion_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp I &kp O &kp N>;
+        };
+
+        on_macro: on_macro {
+            label = "on_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp O &kp N>;
+        };
+
+        ust_macro: ust_macro {
+            label = "ust_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp U &kp S &kp T>;
+        };
+
+        ment_macro: ment_macro {
+            label = "ment_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp M &kp E &kp N &kp T>;
+        };
+
+        er_macro: er_macro {
+            label = "er_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp E &kp R>;
+        };
+
+        which_macro: which_macro {
+            label = "which_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp W &kp H &kp I &kp C &kp H>;
+        };
+
+        es_macro: es_macro {
+            label = "es_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp E &kp S>;
+        };
+        
+        // =======================================
+        // === SMART REPEAT FUNCTIONALITY MACROS =
+        // =======================================
+        
+        ing_macro: ing_macro {
+            label = "ing_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp I &kp N &kp G>;
+        };
+
+        // Magic Sturdy repeat key override macros
+        nd_macro: nd_macro {
+            label = "nd_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp N &kp D>;
+        };
+
+        ng_macro: ng_macro {
+            label = "ng_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp N &kp G>;
+        };
+
+        ou_macro: ou_macro {
+            label = "ou_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp O &kp U>;
+        };
+
+        because_macro: because_macro {
+            label = "because_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp B &kp E &kp C &kp A &kp U &kp S &kp E>;
+        };
+
+        would_macro: would_macro {
+            label = "would_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp W &kp O &kp U &kp L &kp D>;
+        };
+
+        and_macro: and_macro {
+            label = "and_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp SPACE &kp A &kp N &kp D>;
+        };
+
+        org_macro: org_macro {
+            label = "org_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp O &kp R &kp G>;
+        };
+
+        for_macro: for_macro {
+            label = "for_macro";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kp F &kp O &kp R>;
+        };
+    };
+
+    behaviors {
+        // =======================================
+        // === MAGIC KEY BEHAVIOR ================
+        // =======================================
+        
+        magic_key: magic_key {
+            compatible = "zmk,behavior-antecedent-morph";
+            label = "MAGIC_KEY";
+            #binding-cells = <0>;
+            
+            /*
+             * Magic Sturdy "Magic Key" Mappings 
+             * ---------------------------------
+             * Format: When you press the magic key (^) after pressing...
+             * 
+             * Key + ^   = Output
+             * ------------------
+             * A + ^     = O
+             * B + ^     = BEFORE
+             * C + ^     = Y
+             * etc.
+             */
+            
+            /* Antecedent     Binding/Output     Actual Output */
+            bindings = <
+                &kp O>,          /* A         ->   O           */
+                <&before_macro>, /* B         ->   BEFORE      */
+                <&kp Y>,         /* C         ->   Y           */
+                <&kp Y>,         /* D         ->   Y           */
+                <&kp U>,         /* E         ->   U           */
+                <&trans>,        /* F         ->   (none)      */
+                <&kp Y>,         /* G         ->   Y           */
+                <&trans>,        /* H         ->   (none)      */
+                <&on_macro>,     /* I         ->   ON          */
+                <&ust_macro>,    /* J         ->   UST         */
+                <&kp S>,         /* K         ->   S           */
+                <&kp K>,         /* L         ->   K           */
+                <&ent_macro>,    /* M         ->   ENT         */
+                <&ion_macro>,    /* N         ->   ION         */
+                <&kp A>,         /* O         ->   A           */
+                <&kp Y>,         /* P         ->   Y           */
+                <&trans>,        /* Q         ->   (none)      */
+                <&kp L>,         /* R         ->   L           */
+                <&kp K>,         /* S         ->   K           */
+                <&ment_macro>,   /* T         ->   MENT        */
+                <&kp E>,         /* U         ->   E           */
+                <&er_macro>,     /* V         ->   ER          */
+                <&which_macro>,  /* W         ->   WHICH       */
+                <&es_macro>,     /* X         ->   ES          */
+                <&kp P>,         /* Y         ->   P           */
+                <&trans>,        /* Z         ->   (none)      */
+                <&but_macro>,    /* , (comma) ->   BUT         */
+                <&kp BSLH>,      /* . (period)->   \           */
+                <&trans>,        /* / (slash) ->   (none)      */
+                <&kp GT>,        /* - (minus) ->   >           */
+                <&kp GT>,        /* = (equals)->   >           */
+                <&the_macro>,    /* Space     ->   THE         */
+                <&kp N>          /* magic_key ->   N           */
+            >;
+                
+            antecedents = <
+                &kp A>,          /* A                          */
+                <&kp B>,          /* B                          */
+                <&kp C>,          /* C                          */
+                <&kp D>,          /* D                          */
+                <&kp E>,          /* E                          */
+                <&kp F>,          /* F                          */
+                <&kp G>,          /* G                          */
+                <&kp H>,          /* H                          */
+                <&kp I>,          /* I                          */
+                <&kp J>,          /* J                          */
+                <&kp K>,          /* K                          */
+                <&kp L>,          /* L                          */
+                <&kp M>,          /* M                          */
+                <&kp N>,          /* N                          */
+                <&kp O>,          /* O                          */
+                <&kp P>,          /* P                          */
+                <&kp Q>,          /* Q                          */
+                <&kp R>,          /* R                          */
+                <&kp S>,          /* S                          */
+                <&kp T>,          /* T                          */
+                <&kp U>,          /* U                          */
+                <&kp V>,          /* V                          */
+                <&kp W>,          /* W                          */
+                <&kp X>,          /* X                          */
+                <&kp Y>,          /* Y                          */
+                <&kp Z>,          /* Z                          */
+                <&kp COMMA>,      /* , (comma)                  */
+                <&kp DOT>,        /* . (period)                 */
+                <&kp FSLH>,       /* / (slash)                  */
+                <&kp MINUS>,      /* - (minus)                  */
+                <&kp EQUAL>,      /* = (equals)                 */
+                <&kp SPACE>,      /* Space                      */
+                <&magic_key>      /* magic_key                  */
+            >;
+                
+            max-delay-ms = <250>;
+            defaults = <&kp N>;  // Default output is N if no matching antecedent
+        };
+
+        // =======================================
+        // === SMART REPEAT BEHAVIORS ============
+        // =======================================
+        
+        // Built-in ZMK key repeat behavior - used for standard key repetition
+        key_repeat: key_repeat {
+            compatible = "zmk,behavior-key-repeat";
+            label = "KEY_REPEAT";
+            #binding-cells = <0>;
+            // Optionally configure usage pages to include consumer keys
+            usage-pages = <HID_USAGE_KEY HID_USAGE_CONSUMER>;
+        };
+
+        // Enhanced repeat key with context-aware output for Magic Sturdy
+        smart_repeat: smart_repeat {
+            compatible = "zmk,behavior-antecedent-morph";
+            label = "SMART_REPEAT";
+            #binding-cells = <0>;
+            
+            /*
+             * Smart Repeat Key - context-aware repeating
+             * -----------------------------------------
+             * From Magic Sturdy design: https://github.com/Ikcelaks/keyboard_layouts
+             * 
+             * Magic Sturdy's repeat key overrides:
+             * Prev    Repeat
+             * A       ND
+             * I       NG
+             * Y       OU
+             * N       F
+             * B       ECAUSE
+             * W       OULD
+             * ,       ⎵AND
+             * .       ORG
+             * wspc    FOR
+             */
+            
+            /* Antecedent     Binding/Output     Actual Output */
+            bindings = <
+                // ---- EXACT MAGIC STURDY OVERRIDES ----
+                <&nd_macro>,      /* A         ->   ND          */
+                <&ng_macro>,      /* I         ->   NG          */
+                <&ou_macro>,      /* Y         ->   OU          */
+                <&kp F>,          /* N         ->   F           */
+                <&because_macro>, /* B         ->   BECAUSE     */
+                <&would_macro>,   /* W         ->   WOULD       */
+                <&and_macro>,     /* , (comma) ->   ⎵AND        */
+                <&org_macro>,     /* . (period)->   ORG         */
+                <&for_macro>,     /* Space     ->   FOR         */
+                
+                // ---- NAVIGATION KEY PAIRS ----
+                <&kp RIGHT>,      /* LEFT      ->   RIGHT       */
+                <&kp LEFT>,       /* RIGHT     ->   LEFT        */
+                <&kp UP>,         /* DOWN      ->   UP          */
+                <&kp DOWN>,       /* UP        ->   DOWN        */
+                <&kp HOME>,       /* END       ->   HOME        */
+                <&kp END>,        /* HOME      ->   END         */
+                <&kp PAGE_UP>,    /* PAGE_DOWN ->   PAGE_UP     */
+                <&kp PAGE_DOWN>,  /* PAGE_UP   ->   PAGE_DOWN   */
+                
+                // ---- BRACKET/PARENTHESIS MATCHING ----
+                <&kp RBRC>,       /* [         ->   ]           */
+                <&kp LBRC>,       /* ]         ->   [           */
+                <&kp RPAR>,       /* (         ->   )           */
+                <&kp LPAR>,       /* )         ->   (           */
+                <&kp GT>,         /* <         ->   >           */
+                <&kp LT>,         /* >         ->   <           */
+                <&kp RBKT>,       /* {         ->   }           */
+                <&kp LBKT>,       /* }         ->   {           */
+                
+                // ---- QUOTE HANDLING ----
+                <&kp DQT>,        /* '         ->   "           */
+                <&kp SQT>,        /* "         ->   '           */
+                
+                // ---- MODIFIER KEY HANDLING ----
+                <&key_repeat>,    /* Ctrl+     ->   repeat      */
+                <&key_repeat>,    /* Shift+    ->   repeat      */
+                <&key_repeat>,    /* Alt+      ->   repeat      */
+                <&key_repeat>,    /* GUI+      ->   repeat      */
+                
+                // Default fallback for any unspecified key
+                <&key_repeat>     /* Any other ->   standard    */
+            >;
+                
+            antecedents = <
+                // ---- EXACT MAGIC STURDY OVERRIDES ----
+                &kp A>,           /* A                          */
+                <&kp I>,           /* I                          */
+                <&kp Y>,           /* Y                          */
+                <&kp N>,           /* N                          */
+                <&kp B>,           /* B                          */
+                <&kp W>,           /* W                          */
+                <&kp COMMA>,       /* , (comma)                  */
+                <&kp DOT>,         /* . (period)                 */
+                <&kp SPACE>,       /* Space                      */
+                
+                // Navigation key pairs
+                <&kp LEFT>,        /* LEFT                      */
+                <&kp RIGHT>,       /* RIGHT                     */
+                <&kp DOWN>,        /* DOWN                      */
+                <&kp UP>,          /* UP                        */
+                <&kp END>,         /* END                       */
+                <&kp HOME>,        /* HOME                      */
+                <&kp PAGE_DOWN>,   /* PAGE_DOWN                 */
+                <&kp PAGE_UP>,     /* PAGE_UP                   */
+                
+                // Brackets and parentheses
+                <&kp LBRC>,        /* [                         */
+                <&kp RBRC>,        /* ]                         */
+                <&kp LPAR>,        /* (                         */
+                <&kp RPAR>,        /* )                         */
+                <&kp LT>,          /* <                         */
+                <&kp GT>,          /* >                         */
+                <&kp LBKT>,        /* {                         */
+                <&kp RBKT>,        /* }                         */
+                
+                // Quotes
+                <&kp SQT>,         /* '                         */
+                <&kp DQT>,         /* "                         */
+                
+                // For modifier keys support
+                <&kt LCTRL>,       /* Ctrl                      */
+                <&kt LSHFT>,       /* Shift                     */
+                <&kt LALT>,        /* Alt                       */
+                <&kt LGUI>,        /* GUI                       */
+                
+                // Default fallback
+                <&none>            /* Any other key             */
+            >;
+                
+            max-delay-ms = <300>;  // Slightly longer timeout for better usability
+            defaults = <&key_repeat>;  // Default to standard repeat for unmatched keys
+        };
+    };
+
     combos {
             compatible = "zmk,combos";
             combo_esc {
@@ -36,25 +489,16 @@
                 key-positions = <0 1>;
                 bindings = <&kp ESC>;
             };
-    };
-
-    macros {
-        gif: gif {
-            label = "giphy";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp LSHFT>
-                , <&macro_tap &kp N2>
-                , <&macro_release &kp LSHFT>
-                , <&macro_tap &kp G &kp I &kp F>
-                ;
-        };
+            combo_base_toggle {
+                timeout-ms = <50>;
+                key-positions = <20 31>;
+                bindings = <&tog BASE2>;
+            };
     };
 
         keymap {
                 compatible = "zmk,keymap";
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
                 base_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -79,7 +523,30 @@ label= "BASE"                              ;
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                base2_layer {
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+label= "BASE2"                             ;
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+//             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+//             ┃     V     ┃     M     ┃     L     ┃     C     ┃     P     ┃   ┃     B     ┃  MAGIC    ┃     U     ┃     O     ┃     ,     ┃
+//             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
+//             ┃     S     ┃     T     ┃     R     ┃     D     ┃     Y     ┃   ┃     F     ┃     N     ┃     E     ┃     A     ┃     I     ┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃           ┃     X     ┃     K     ┃     J     ┃     G     ┃     W     ┃   ┃     Z     ┃     H     ┃     '     ┃     ?     ┃     .     ┃           ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                     ┃   SPACE   ┃    TAB    ┃    /      ┃   ┃ SMARTREP  ┃    SHIFT  ┃           ┃
+//                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+ bindings = <
+// ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
+
+                &kp V       &kp M       &kp L       &kp C         &kp P           &kp B       &magic_key  &kp U       &kp O       &kp COMMA
+                &kp S       &kp T       &kp R       &kp D         &kp Y           &kp F       &kp N       &kp E       &kp A       &kp I
+    &kp X       &kp X       &kp K       &kp J       &kp G         &kp W           &kp Z       &kp H       &kp SQT     &kp QMARK   &kp DOT     &kp BSLH
+                                        &trans      &trans        &trans          &smart_repeat &trans    &trans
+                        >;
+                };
+
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 nav_layer {
@@ -105,7 +572,7 @@ label= "NAVI"                              ;
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 sim_layer {
@@ -119,7 +586,7 @@ label= "SYM"                               ;
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃           ┃  EMAIL1   ┃  EMAIL2   ┃           ┃           ┃           ┃   ┃   VOL-    ┃   VOL+    ┃   LAST    ┃   NEXT    ┃     \     ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃           ┃    GIF    ┃    ADJ    ┃   ┃           ┃           ┃           ┃
+//                                     ┃           ┃           ┃    ADJ    ┃   ┃           ┃           ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
@@ -127,11 +594,11 @@ label= "SYM"                               ;
                 &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp RA(U)   &kp SQT     &kp DQT       
                 &kp RA(A)   &trans      &kp RA(S)   &trans      &trans          &kp C_MUTE  &kp LS(RA(N4)) &kp RA(N5) &kp RA(N4)   &kp RA(O) 
     &trans      &kp RA(F18) &kp RA(F19) &trans      &trans      &trans          &kp C_VOL_DN &kp C_VOL_UP &kp C_PREV &kp C_NEXT  &kp BSLH   &trans         
-                                        &trans      &gif        &mo ADJ         &trans      &kp C_PP    &trans      
+                                        &trans      &trans      &mo ADJ         &trans      &kp C_PP    &trans      
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 adjust_layer {
