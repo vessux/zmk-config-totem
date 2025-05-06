@@ -18,12 +18,15 @@
 //    - Located at key position 6 (middle of top row, right half)
 //    - When pressed after another key, outputs a context-sensitive character or word
 //    - Uses the zmk-antecedent-morph behavior from https://github.com/ssbb/zmk-antecedent-morph
+//    - Outputs are designed to not repeat the initial letter (e.g., B + ^ outputs "efore" not "before"
+//      since B was already typed)
 //
 // 2. SMART REPEAT KEY
 //    - Located at key position 35 (left key of right thumb cluster)
 //    - Standard key repetition with intelligent context-aware overrides:
 //      * Letters like A, I, Y → common suffixes like ND, NG, OU
-//      * Common words like BECAUSE, WOULD when pressed after certain letters
+//      * Common words like BECAUSE, WOULD when pressed after certain letters (outputs "ecause" after B, 
+//        "ould" after W to avoid duplicated letters)
 //      * Navigation, bracket/parenthesis, and quote pair smart handling
 //
 // MAGIC STURDY LAYOUT:
@@ -85,7 +88,7 @@
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <0>;
-            bindings = <&macro_tap &kp B &kp E &kp F &kp O &kp R &kp E>;
+            bindings = <&macro_tap &kp E &kp F &kp O &kp R &kp E>;
         };
 
         ent_macro: ent_macro {
@@ -148,7 +151,7 @@
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <0>;
-            bindings = <&macro_tap &kp W &kp H &kp I &kp C &kp H>;
+            bindings = <&macro_tap &kp H &kp I &kp C &kp H>;
         };
 
         es_macro: es_macro {
@@ -207,7 +210,7 @@
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <0>;
-            bindings = <&macro_tap &kp B &kp E &kp C &kp A &kp U &kp S &kp E>;
+            bindings = <&macro_tap &kp E &kp C &kp A &kp U &kp S &kp E>;
         };
 
         would_macro: would_macro {
@@ -216,7 +219,7 @@
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <0>;
-            bindings = <&macro_tap &kp W &kp O &kp U &kp L &kp D>;
+            bindings = <&macro_tap &kp O &kp U &kp L &kp D>;
         };
 
         and_macro: and_macro {
@@ -261,11 +264,12 @@
              * Magic Sturdy "Magic Key" Mappings 
              * ---------------------------------
              * Format: When you press the magic key (^) after pressing...
+             * Note: For macros, the initial letter is omitted since it was already typed
              * 
              * Key + ^   = Output
              * ------------------
              * A + ^     = O
-             * B + ^     = BEFORE
+             * B + ^     = EFORE (not "before", since B was already typed)
              * C + ^     = Y
              * etc.
              */
@@ -273,7 +277,7 @@
             /* Antecedent     Binding/Output     Actual Output */
             bindings = <
                 &kp O>,          /* A         ->   O           */
-                <&before_macro>, /* B         ->   BEFORE      */
+                <&before_macro>, /* B         ->   EFORE       */
                 <&kp Y>,         /* C         ->   Y           */
                 <&kp Y>,         /* D         ->   Y           */
                 <&kp U>,         /* E         ->   U           */
@@ -294,7 +298,7 @@
                 <&ment_macro>,   /* T         ->   MENT        */
                 <&kp E>,         /* U         ->   E           */
                 <&er_macro>,     /* V         ->   ER          */
-                <&which_macro>,  /* W         ->   WHICH       */
+                <&which_macro>,  /* W         ->   HICH        */
                 <&es_macro>,     /* X         ->   ES          */
                 <&kp P>,         /* Y         ->   P           */
                 <&trans>,        /* Z         ->   (none)      */
@@ -370,6 +374,7 @@
              * Smart Repeat Key - context-aware repeating
              * -----------------------------------------
              * From Magic Sturdy design: https://github.com/Ikcelaks/keyboard_layouts
+             * Note: For word completions, the initial letter is omitted since it was already typed
              * 
              * Magic Sturdy's repeat key overrides:
              * Prev    Repeat
@@ -377,8 +382,8 @@
              * I       NG
              * Y       OU
              * N       F
-             * B       ECAUSE
-             * W       OULD
+             * B       ECAUSE (not "because", since B was already typed)
+             * W       OULD (not "would", since W was already typed)
              * ,       ⎵AND
              * .       ORG
              * wspc    FOR
@@ -391,8 +396,8 @@
                 <&ng_macro>,      /* I         ->   NG          */
                 <&ou_macro>,      /* Y         ->   OU          */
                 <&kp F>,          /* N         ->   F           */
-                <&because_macro>, /* B         ->   BECAUSE     */
-                <&would_macro>,   /* W         ->   WOULD       */
+                <&because_macro>, /* B         ->   ECAUSE      */
+                <&would_macro>,   /* W         ->   OULD        */
                 <&and_macro>,     /* , (comma) ->   ⎵AND        */
                 <&org_macro>,     /* . (period)->   ORG         */
                 <&for_macro>,     /* Space     ->   FOR         */
@@ -498,7 +503,7 @@
 
         keymap {
                 compatible = "zmk,keymap";
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
                 base_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -598,7 +603,7 @@ label= "SYM"                               ;
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 adjust_layer {

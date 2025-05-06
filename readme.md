@@ -14,7 +14,35 @@ TOTEM is a 38 key column-staggered split keyboard running [ZMK](https://zmk.dev/
 
 ![TOTEM layout](/docs/images/TOTEM_layout.svg)
 
+## SPECIAL FEATURES
 
+### Magic Sturdy Layout
+This configuration implements the Magic Sturdy layout, an optimized layout with special productivity features. The base layout is:
+
+```
+Top row:    V M L C P | B ^ U O ,
+Home row:   S T R D Y | F N E A I
+Bottom row: X K J G W | Z H ' ? .
+Thumb keys: Space Tab / | @ Shift _
+```
+
+### Magic Key (^)
+Located in the top row of the right half, the Magic Key transforms the previously pressed key into a context-sensitive output:
+- Press B, then Magic Key → outputs "efore" (completing "before")
+- Press W, then Magic Key → outputs "hich" (completing "which")
+- Press Space, then Magic Key → outputs "THE"
+And many more combinations!
+
+### Smart Repeat Key
+Located in the right thumb cluster, this key provides intelligent repetition:
+- Standard key repetition works as expected
+- Context-aware overrides for common combinations:
+  * Press A, then Repeat → outputs "nd" 
+  * Press B, then Repeat → outputs "ecause"
+  * Press W, then Repeat → outputs "ould"
+- Smart navigation and bracket/quote pair handling
+
+For more details, see the comments in the `config/totem.keymap` file.
 
 ## HOW TO USE
 

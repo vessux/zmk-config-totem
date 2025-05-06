@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+This rule is helpful to whole coed base for referencing key nunbers in layouts
+Always reference [key_numbers.txt](mdc:key_numbers.txt) for keys location, keyboard layout and key numbers
