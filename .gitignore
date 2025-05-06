@@ -1,0 +1,8 @@
+# Build artifacts
+build/
+
+# Docker compose
+.env
+
+# MacOS files
+.DS_Store 

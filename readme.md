@@ -23,8 +23,10 @@ This configuration implements the Magic Sturdy layout, an optimized layout with 
 Top row:    V M L C P | B ^ U O ,
 Home row:   S T R D Y | F N E A I
 Bottom row: X K J G W | Z H ' ? .
-Thumb keys: Space Tab / | @ Shift _
+Thumb keys:     ⌦ ⎵ ⇥ | @ ⏎ ⌫    
 ```
+
+*Magic Sturdy layout created by [Ikcelaks](https://github.com/Ikcelaks/keyboard_layouts). Used with appreciation.*
 
 ### Magic Key (^)
 Located in the top row of the right half, the Magic Key transforms the previously pressed key into a context-sensitive output:
@@ -44,15 +46,37 @@ Located in the right thumb cluster, this key provides intelligent repetition:
 
 For more details, see the comments in the `config/totem.keymap` file.
 
-## HOW TO USE
+## BUILD OPTIONS
 
-- fork this repo
-- `git clone` your repo, to create a local copy on your PC (you can use the [command line](https://www.atlassian.com/git/tutorials) or [github desktop](https://desktop.github.com/))
-- adjust the totem.keymap file (find all the keycodes on [the zmk docs pages](https://zmk.dev/docs/codes/))
-- `git push` your repo to your fork
-- on the GitHub page of your fork navigate to "Actions"
-- scroll down and unzip the `firmware.zip` archive that contains the latest firmware
-- connect the left half of the TOTEM to your PC, press reset twice
-- the keyboard should now appear as a mass storage device
-- drag'n'drop the `totem_left-seeeduino_xiao_ble-zmk.uf2` file from the archive onto the storage device
-- repeat this process with the right half and the `totem_right-seeeduino_xiao_ble-zmk.uf2` file.
+### Cloud Build (GitHub Actions)
+This is the default method for building the firmware:
+
+1. Fork this repo
+2. `git clone` your repo to create a local copy on your PC
+3. Adjust the totem.keymap file (find all the keycodes on [the zmk docs pages](https://zmk.dev/docs/codes/))
+4. `git push` your repo to your fork
+5. On the GitHub page of your fork navigate to "Actions"
+6. Scroll down and unzip the `firmware.zip` archive that contains the latest firmware
+7. Flash the firmware to your keyboard halves (see Flashing Instructions below)
+
+### Local Build (Docker)
+For faster development iterations, you can build locally without waiting for GitHub Actions:
+
+1. Make sure Docker Desktop is installed
+2. Run `make build` to build both halves
+3. Firmware will be available in the `build/` directory
+4. Flash the firmware to your keyboard halves
+
+See [Local Build Documentation](/docs/local-build.md) for more details.
+
+## FLASHING INSTRUCTIONS
+
+1. Connect the keyboard half to your PC and press reset twice
+2. The keyboard should appear as a mass storage device
+3. Drag and drop the appropriate firmware file onto the storage device:
+   - Left half: `totem_left.uf2`
+   - Right half: `totem_right.uf2`
+
+## KEYBOARD REFERENCE
+
+See the [keyboard layout reference](/docs/key-numbers.md) for key numbers, positions, and usage instructions.
