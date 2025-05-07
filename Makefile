@@ -1,48 +1,52 @@
-.PHONY: build build-left build-right clean shell rebuild-container
+.PHONY: docker-build build shell build-all docker-rebuild
 
-# Default target
-all: build
+IMAGE_NAME := zmk-config-totem:local
+DOCKERFILE := local-build/Dockerfile
+WORKDIR := /app
+BOARD ?= seeeduino_xiao_ble
+SHIELD ?= totem_left
 
-# Ensure the container is built first
-container:
-	@docker compose -f local-build/docker-compose.yml build
+# Build the Docker image
 
-# Rebuild container without using cache
-rebuild-container:
-	@echo "Rebuilding Docker container with latest ZMK..."
-	@docker compose -f local-build/docker-compose.yml build --no-cache zmk-build
-	@echo "Container rebuilt successfully!"
+docker-build:
+	docker build -f $(DOCKERFILE) -t $(IMAGE_NAME) .
+
+docker-rebuild:
+	docker build --no-cache -f $(DOCKERFILE) -t $(IMAGE_NAME) .
+
+# Run a west build inside the container
+# Usage: make build BOARD=seeeduino_xiao_ble SHIELD=totem_left
+
+build:
+	docker run --rm \
+	  -v $$(pwd)/firmware:$(WORKDIR)/firmware\
+	  -v $$(pwd)/config:$(WORKDIR)/config \
+	  --workdir $(WORKDIR) $(IMAGE_NAME) \
+	  /bin/bash -c "west build -s zmk/app -d build/$(BOARD)-$(SHIELD) -b $(BOARD) -- -DZMK_CONFIG=$(WORKDIR)/config -DSHIELD=$(SHIELD) && \
+	  mkdir -p firmware && \
+	  cp build/$(BOARD)-$(SHIELD)/zephyr/zmk.uf2 firmware/$(BOARD)-$(SHIELD).uf2"
 
 # Build both halves
-build: container
-	@LOCAL_BUILD_DIR="$(shell pwd)/local-build" ./local-build/build.sh both
 
-# Build just the left half
-build-left: container
-	@LOCAL_BUILD_DIR="$(shell pwd)/local-build" ./local-build/build.sh left
+build-all:
+	$(MAKE) build BOARD=$(BOARD) SHIELD=totem_left
+	$(MAKE) build BOARD=$(BOARD) SHIELD=totem_right
 
-# Build just the right half
-build-right: container
-	@LOCAL_BUILD_DIR="$(shell pwd)/local-build" ./local-build/build.sh right
+# Open a shell inside the container for manual west commands
 
-# Build with clean (pristine)
-build-clean: container
-	@LOCAL_BUILD_DIR="$(shell pwd)/local-build" ./local-build/build.sh --clean both
-
-# Clean the build directory
-clean:
-	@rm -rf build
-
-# Open a shell in the build container
-shell: container
-	@docker compose -f local-build/docker-compose.yml run --rm zmk-build bash
+shell:
+	docker run --rm -it \
+	  -v $$(pwd)/config:$(WORKDIR)/config \
+	  -v $$(pwd)/firmware:$(WORKDIR)/firmware \
+	  --workdir $(WORKDIR) $(IMAGE_NAME) /bin/bash
 
 help:
 	@echo "Available targets:"
-	@echo "  build       - Build both halves of the keyboard"
-	@echo "  build-left  - Build just the left half"
-	@echo "  build-right - Build just the right half"
-	@echo "  build-clean - Perform a clean build of both halves"
-	@echo "  clean       - Clean the build directory"
-	@echo "  shell       - Open a shell in the build container"
-	@echo "  rebuild-container - Rebuild Docker container with latest ZMK" 
+	@echo "  docker-build    - Build the Docker image"
+	@echo "  docker-rebuild  - Rebuild the Docker image from scratch (no cache)"
+	@echo "  build           - Build the firmware for a specific board and shield"
+	@echo "                    Usage: make build BOARD=seeeduino_xiao_ble SHIELD=totem_left"
+	@echo "  build-all       - Build firmware for both left and right halves"
+	@echo "  shell           - Open a shell inside the container for manual commands"
+	@echo ""
+	@echo "Output firmware will be in the ./firmware directory" 

@@ -260,92 +260,28 @@
             label = "MAGIC_KEY";
             #binding-cells = <0>;
             
-            /*
-             * Magic Sturdy "Magic Key" Mappings 
-             * ---------------------------------
-             * Format: When you press the magic key (^) after pressing...
-             * Note: For macros, the initial letter is omitted since it was already typed
-             * 
-             * Key + ^   = Output
-             * ------------------
-             * A + ^     = O
-             * B + ^     = EFORE (not "before", since B was already typed)
-             * C + ^     = Y
-             * etc.
+            /* Magic Key Mappings
+             * ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+             * ┃ First Key  ┃ Magic Output ┃   ┃ First Key  ┃ Magic Output ┃   ┃ First Key  ┃ Magic Output ┃
+             * ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
+             * ┃ A          ┃ O            ┃   ┃ N          ┃ ION          ┃   ┃ [          ┃ ]            ┃
+             * ┃ B          ┃ EFORE        ┃   ┃ O          ┃ A            ┃   ┃ ]          ┃ [            ┃
+             * ┃ C          ┃ Y            ┃   ┃ P          ┃ Y            ┃   ┃ <          ┃ >            ┃
+             * ┃ D          ┃ Y            ┃   ┃ Q          ┃ (none)       ┃   ┃ >          ┃ <            ┃
+             * ┃ E          ┃ U            ┃   ┃ R          ┃ L            ┃   ┃ {          ┃ }            ┃
+             * ┃ F          ┃ (none)       ┃   ┃ S          ┃ K            ┃   ┃ }          ┃ {            ┃
+             * ┃ G          ┃ Y            ┃   ┃ T          ┃ MENT         ┃   ┃ ,          ┃  BUT         ┃
+             * ┃ H          ┃ (none)       ┃   ┃ U          ┃ E            ┃   ┃ .          ┃ \            ┃
+             * ┃ I          ┃ ON           ┃   ┃ V          ┃ ER           ┃   ┃ /          ┃ (none)       ┃
+             * ┃ J          ┃ UST          ┃   ┃ W          ┃ HICH         ┃   ┃ -          ┃ >            ┃
+             * ┃ K          ┃ S            ┃   ┃ X          ┃ ES           ┃   ┃ =          ┃ >            ┃
+             * ┃ L          ┃ K            ┃   ┃ Y          ┃ P            ┃   ┃ Space      ┃ THE          ┃
+             * ┃ M          ┃ ENT          ┃   ┃ Z          ┃ (none)       ┃   ┃ ^ (itself) ┃ N            ┃
+             * ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛
              */
-            
-            /* Antecedent     Binding/Output     Actual Output */
-            bindings = <
-                &kp O>,          /* A         ->   O           */
-                <&before_macro>, /* B         ->   EFORE       */
-                <&kp Y>,         /* C         ->   Y           */
-                <&kp Y>,         /* D         ->   Y           */
-                <&kp U>,         /* E         ->   U           */
-                <&trans>,        /* F         ->   (none)      */
-                <&kp Y>,         /* G         ->   Y           */
-                <&trans>,        /* H         ->   (none)      */
-                <&on_macro>,     /* I         ->   ON          */
-                <&ust_macro>,    /* J         ->   UST         */
-                <&kp S>,         /* K         ->   S           */
-                <&kp K>,         /* L         ->   K           */
-                <&ent_macro>,    /* M         ->   ENT         */
-                <&ion_macro>,    /* N         ->   ION         */
-                <&kp A>,         /* O         ->   A           */
-                <&kp Y>,         /* P         ->   Y           */
-                <&trans>,        /* Q         ->   (none)      */
-                <&kp L>,         /* R         ->   L           */
-                <&kp K>,         /* S         ->   K           */
-                <&ment_macro>,   /* T         ->   MENT        */
-                <&kp E>,         /* U         ->   E           */
-                <&er_macro>,     /* V         ->   ER          */
-                <&which_macro>,  /* W         ->   HICH        */
-                <&es_macro>,     /* X         ->   ES          */
-                <&kp P>,         /* Y         ->   P           */
-                <&trans>,        /* Z         ->   (none)      */
-                <&but_macro>,    /* , (comma) ->   BUT         */
-                <&kp BSLH>,      /* . (period)->   \           */
-                <&trans>,        /* / (slash) ->   (none)      */
-                <&kp GT>,        /* - (minus) ->   >           */
-                <&kp GT>,        /* = (equals)->   >           */
-                <&the_macro>,    /* Space     ->   THE         */
-                <&kp N>          /* magic_key ->   N           */
-            >;
+            bindings = <&kp O>, <&before_macro>, <&kp Y>, <&kp Y>, <&kp U>, <&trans>, <&kp Y>, <&trans>, <&on_macro>, <&ust_macro>, <&kp S>, <&kp K>, <&ent_macro>, <&ion_macro>, <&kp A>, <&kp Y>, <&trans>, <&kp L>, <&kp K>, <&ment_macro>, <&kp E>, <&er_macro>, <&which_macro>, <&es_macro>, <&kp P>, <&trans>, <&but_macro>, <&kp BSLH>, <&trans>, <&kp GT>, <&kp GT>, <&the_macro>, <&kp N>;
                 
-            antecedents = <
-                &kp A>,          /* A                          */
-                <&kp B>,          /* B                          */
-                <&kp C>,          /* C                          */
-                <&kp D>,          /* D                          */
-                <&kp E>,          /* E                          */
-                <&kp F>,          /* F                          */
-                <&kp G>,          /* G                          */
-                <&kp H>,          /* H                          */
-                <&kp I>,          /* I                          */
-                <&kp J>,          /* J                          */
-                <&kp K>,          /* K                          */
-                <&kp L>,          /* L                          */
-                <&kp M>,          /* M                          */
-                <&kp N>,          /* N                          */
-                <&kp O>,          /* O                          */
-                <&kp P>,          /* P                          */
-                <&kp Q>,          /* Q                          */
-                <&kp R>,          /* R                          */
-                <&kp S>,          /* S                          */
-                <&kp T>,          /* T                          */
-                <&kp U>,          /* U                          */
-                <&kp V>,          /* V                          */
-                <&kp W>,          /* W                          */
-                <&kp X>,          /* X                          */
-                <&kp Y>,          /* Y                          */
-                <&kp Z>,          /* Z                          */
-                <&kp COMMA>,      /* , (comma)                  */
-                <&kp DOT>,        /* . (period)                 */
-                <&kp FSLH>,       /* / (slash)                  */
-                <&kp MINUS>,      /* - (minus)                  */
-                <&kp EQUAL>,      /* = (equals)                 */
-                <&kp SPACE>,      /* Space                      */
-                <&magic_key>      /* magic_key                  */
-            >;
+            antecedents = <A B C D E F G H I J K L M N O P Q R S T U V W X Y Z COMMA DOT FSLH MINUS EQUAL SPACE>;
                 
             max-delay-ms = <250>;
             defaults = <&kp N>;  // Default output is N if no matching antecedent
@@ -371,115 +307,42 @@
             #binding-cells = <0>;
             
             /*
-             * Smart Repeat Key - context-aware repeating
-             * -----------------------------------------
-             * From Magic Sturdy design: https://github.com/Ikcelaks/keyboard_layouts
-             * Note: For word completions, the initial letter is omitted since it was already typed
-             * 
-             * Magic Sturdy's repeat key overrides:
-             * Prev    Repeat
-             * A       ND
-             * I       NG
-             * Y       OU
-             * N       F
-             * B       ECAUSE (not "because", since B was already typed)
-             * W       OULD (not "would", since W was already typed)
-             * ,       ⎵AND
-             * .       ORG
-             * wspc    FOR
+             * Smart Repeat Mappings
+             * ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+             * ┃ First Key  ┃ Smart Output ┃   ┃ First Key      ┃ Smart Output ┃   ┃ First Key  ┃ Smart Output ┃
+             * ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
+             * ┃ A          ┃ ND           ┃   ┃ LEFT           ┃ RIGHT        ┃   ┃ LBRC       ┃ RBRC         ┃
+             * ┃ I          ┃ NG           ┃   ┃ RIGHT          ┃ LEFT         ┃   ┃ RBRC       ┃ LBRC         ┃
+             * ┃ Y          ┃ OU           ┃   ┃ DOWN           ┃ UP           ┃   ┃ LPAR       ┃ RPAR         ┃
+             * ┃ N          ┃ F            ┃   ┃ UP             ┃ DOWN         ┃   ┃ RPAR       ┃ LPAR         ┃
+             * ┃ B          ┃ ECAUSE       ┃   ┃ END            ┃ HOME         ┃   ┃ LT         ┃ GT           ┃
+             * ┃ W          ┃ OULD         ┃   ┃ HOME           ┃ END          ┃   ┃ GT         ┃ LT           ┃
+             * ┃ ,          ┃  AND         ┃   ┃ PG_DN          ┃ PG_UP        ┃   ┃ LBKT       ┃ RBKT         ┃
+             * ┃ .          ┃ ORG          ┃   ┃ PG_UP          ┃ PG_DN        ┃   ┃ RBKT       ┃ LBKT         ┃
+             * ┃ Space      ┃ FOR          ┃   ┃ SQT            ┃ DQT          ┃   ┃ Modifiers  ┃ Repeat       ┃
+             * ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┃ DQT            ┃ SQT          ┃   ┃ Others     ┃ Std. Repeat  ┃
+             *                                 ┗━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛
              */
-            
-            /* Antecedent     Binding/Output     Actual Output */
-            bindings = <
-                // ---- EXACT MAGIC STURDY OVERRIDES ----
-                <&nd_macro>,      /* A         ->   ND          */
-                <&ng_macro>,      /* I         ->   NG          */
-                <&ou_macro>,      /* Y         ->   OU          */
-                <&kp F>,          /* N         ->   F           */
-                <&because_macro>, /* B         ->   ECAUSE      */
-                <&would_macro>,   /* W         ->   OULD        */
-                <&and_macro>,     /* , (comma) ->   ⎵AND        */
-                <&org_macro>,     /* . (period)->   ORG         */
-                <&for_macro>,     /* Space     ->   FOR         */
-                
-                // ---- NAVIGATION KEY PAIRS ----
-                <&kp RIGHT>,      /* LEFT      ->   RIGHT       */
-                <&kp LEFT>,       /* RIGHT     ->   LEFT        */
-                <&kp UP>,         /* DOWN      ->   UP          */
-                <&kp DOWN>,       /* UP        ->   DOWN        */
-                <&kp HOME>,       /* END       ->   HOME        */
-                <&kp END>,        /* HOME      ->   END         */
-                <&kp PAGE_UP>,    /* PAGE_DOWN ->   PAGE_UP     */
-                <&kp PAGE_DOWN>,  /* PAGE_UP   ->   PAGE_DOWN   */
-                
-                // ---- BRACKET/PARENTHESIS MATCHING ----
-                <&kp RBRC>,       /* [         ->   ]           */
-                <&kp LBRC>,       /* ]         ->   [           */
-                <&kp RPAR>,       /* (         ->   )           */
-                <&kp LPAR>,       /* )         ->   (           */
-                <&kp GT>,         /* <         ->   >           */
-                <&kp LT>,         /* >         ->   <           */
-                <&kp RBKT>,       /* {         ->   }           */
-                <&kp LBKT>,       /* }         ->   {           */
-                
-                // ---- QUOTE HANDLING ----
-                <&kp DQT>,        /* '         ->   "           */
-                <&kp SQT>,        /* "         ->   '           */
-                
-                // ---- MODIFIER KEY HANDLING ----
-                <&key_repeat>,    /* Ctrl+     ->   repeat      */
-                <&key_repeat>,    /* Shift+    ->   repeat      */
-                <&key_repeat>,    /* Alt+      ->   repeat      */
-                <&key_repeat>,    /* GUI+      ->   repeat      */
-                
-                // Default fallback for any unspecified key
-                <&key_repeat>     /* Any other ->   standard    */
-            >;
+            bindings = <&nd_macro>, <&ng_macro>, <&ou_macro>, <&kp F>, <&because_macro>, <&would_macro>, <&and_macro>, <&org_macro>, <&for_macro>, <&kp RIGHT>, <&kp LEFT>, <&kp UP>, <&kp DOWN>, <&kp HOME>, <&kp END>, <&kp PAGE_UP>, <&kp PAGE_DOWN>, <&kp RBRC>, <&kp LBRC>, <&kp RPAR>, <&kp LPAR>, <&kp GT>, <&kp LT>, <&kp RBKT>, <&kp LBKT>, <&kp DQT>, <&kp SQT>, <&key_repeat>, <&key_repeat>, <&key_repeat>, <&key_repeat>, <&key_repeat>;
                 
             antecedents = <
                 // ---- EXACT MAGIC STURDY OVERRIDES ----
-                &kp A>,           /* A                          */
-                <&kp I>,           /* I                          */
-                <&kp Y>,           /* Y                          */
-                <&kp N>,           /* N                          */
-                <&kp B>,           /* B                          */
-                <&kp W>,           /* W                          */
-                <&kp COMMA>,       /* , (comma)                  */
-                <&kp DOT>,         /* . (period)                 */
-                <&kp SPACE>,       /* Space                      */
+                A I Y N B W COMMA DOT SPACE
                 
                 // Navigation key pairs
-                <&kp LEFT>,        /* LEFT                      */
-                <&kp RIGHT>,       /* RIGHT                     */
-                <&kp DOWN>,        /* DOWN                      */
-                <&kp UP>,          /* UP                        */
-                <&kp END>,         /* END                       */
-                <&kp HOME>,        /* HOME                      */
-                <&kp PAGE_DOWN>,   /* PAGE_DOWN                 */
-                <&kp PAGE_UP>,     /* PAGE_UP                   */
+                LEFT RIGHT DOWN UP END HOME PAGE_DOWN PAGE_UP
                 
                 // Brackets and parentheses
-                <&kp LBRC>,        /* [                         */
-                <&kp RBRC>,        /* ]                         */
-                <&kp LPAR>,        /* (                         */
-                <&kp RPAR>,        /* )                         */
-                <&kp LT>,          /* <                         */
-                <&kp GT>,          /* >                         */
-                <&kp LBKT>,        /* {                         */
-                <&kp RBKT>,        /* }                         */
+                LBRC RBRC LPAR RPAR LT GT LBKT RBKT
                 
                 // Quotes
-                <&kp SQT>,         /* '                         */
-                <&kp DQT>,         /* "                         */
+                SQT DQT
                 
                 // For modifier keys support
-                <&kt LCTRL>,       /* Ctrl                      */
-                <&kt LSHFT>,       /* Shift                     */
-                <&kt LALT>,        /* Alt                       */
-                <&kt LGUI>,        /* GUI                       */
+                LCTRL LSHFT LALT LGUI
                 
                 // Default fallback
-                <&none>            /* Any other key             */
+                0
             >;
                 
             max-delay-ms = <300>;  // Slightly longer timeout for better usability
@@ -503,7 +366,7 @@
 
         keymap {
                 compatible = "zmk,keymap";
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
                 base_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

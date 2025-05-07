@@ -30,19 +30,46 @@ Thumb keys:     ⌦ ⎵ ⇥ | @ ⏎ ⌫
 
 ### Magic Key (^)
 Located in the top row of the right half, the Magic Key transforms the previously pressed key into a context-sensitive output:
-- Press B, then Magic Key → outputs "efore" (completing "before")
-- Press W, then Magic Key → outputs "hich" (completing "which")
-- Press Space, then Magic Key → outputs "THE"
-And many more combinations!
+
+```
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ First Key  ┃ Magic Output ┃   ┃ First Key  ┃ Magic Output ┃   ┃ First Key  ┃ Magic Output ┃
+┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
+┃ A          ┃ O            ┃   ┃ N          ┃ ION          ┃   ┃ [          ┃ ]            ┃
+┃ B          ┃ EFORE        ┃   ┃ O          ┃ A            ┃   ┃ ]          ┃ [            ┃
+┃ C          ┃ Y            ┃   ┃ P          ┃ Y            ┃   ┃ <          ┃ >            ┃
+┃ D          ┃ Y            ┃   ┃ Q          ┃ (none)       ┃   ┃ >          ┃ <            ┃
+┃ E          ┃ U            ┃   ┃ R          ┃ L            ┃   ┃ {          ┃ }            ┃
+┃ F          ┃ (none)       ┃   ┃ S          ┃ K            ┃   ┃ }          ┃ {            ┃
+┃ G          ┃ Y            ┃   ┃ T          ┃ MENT         ┃   ┃ ,          ┃  BUT         ┃
+┃ H          ┃ (none)       ┃   ┃ U          ┃ E            ┃   ┃ .          ┃ \            ┃
+┃ I          ┃ ON           ┃   ┃ V          ┃ ER           ┃   ┃ /          ┃ (none)       ┃
+┃ J          ┃ UST          ┃   ┃ W          ┃ HICH         ┃   ┃ -          ┃ >            ┃
+┃ K          ┃ S            ┃   ┃ X          ┃ ES           ┃   ┃ =          ┃ >            ┃
+┃ L          ┃ K            ┃   ┃ Y          ┃ P            ┃   ┃ Space      ┃ THE          ┃
+┃ M          ┃ ENT          ┃   ┃ Z          ┃ (none)       ┃   ┃ ^ (itself) ┃ N            ┃
+┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛
+```
 
 ### Smart Repeat Key
 Located in the right thumb cluster, this key provides intelligent repetition:
-- Standard key repetition works as expected
-- Context-aware overrides for common combinations:
-  * Press A, then Repeat → outputs "nd" 
-  * Press B, then Repeat → outputs "ecause"
-  * Press W, then Repeat → outputs "ould"
-- Smart navigation and bracket/quote pair handling
+
+```
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ First Key  ┃ Smart Output ┃   ┃ First Key      ┃ Smart Output ┃   ┃ First Key  ┃ Smart Output ┃
+┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
+┃ A          ┃ ND           ┃   ┃ LEFT           ┃ RIGHT        ┃   ┃ LBRC       ┃ RBRC         ┃
+┃ I          ┃ NG           ┃   ┃ RIGHT          ┃ LEFT         ┃   ┃ RBRC       ┃ LBRC         ┃
+┃ Y          ┃ OU           ┃   ┃ DOWN           ┃ UP           ┃   ┃ LPAR       ┃ RPAR         ┃
+┃ N          ┃ F            ┃   ┃ UP             ┃ DOWN         ┃   ┃ RPAR       ┃ LPAR         ┃
+┃ B          ┃ ECAUSE       ┃   ┃ END            ┃ HOME         ┃   ┃ LT         ┃ GT           ┃
+┃ W          ┃ OULD         ┃   ┃ HOME           ┃ END          ┃   ┃ GT         ┃ LT           ┃
+┃ ,          ┃  AND         ┃   ┃ PG_DN          ┃ PG_UP        ┃   ┃ LBKT       ┃ RBKT         ┃
+┃ .          ┃ ORG          ┃   ┃ PG_UP          ┃ PG_DN        ┃   ┃ RBKT       ┃ LBKT         ┃
+┃ Space      ┃ FOR          ┃   ┃ SQT            ┃ DQT          ┃   ┃ Modifiers  ┃ Repeat       ┃
+┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┃ DQT            ┃ SQT          ┃   ┃ Others     ┃ Std. Repeat  ┃
+                                ┗━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛
+```
 
 For more details, see the comments in the `config/totem.keymap` file.
 
@@ -63,9 +90,13 @@ This is the default method for building the firmware:
 For faster development iterations, you can build locally without waiting for GitHub Actions:
 
 1. Make sure Docker Desktop is installed
-2. Run `make build` to build both halves
-3. Firmware will be available in the `build/` directory
-4. Flash the firmware to your keyboard halves
+2. Clone this repository and navigate to it
+3. Run `make docker-build` to build the Docker image
+4. Run `make build-all` to build firmware for both halves
+5. Firmware will be available in the `firmware/` directory:
+   - Left half: `seeeduino_xiao_ble-totem_left.uf2`
+   - Right half: `seeeduino_xiao_ble-totem_right.uf2`
+6. Flash the firmware to your keyboard halves
 
 See [Local Build Documentation](/docs/local-build.md) for more details.
 
@@ -74,8 +105,8 @@ See [Local Build Documentation](/docs/local-build.md) for more details.
 1. Connect the keyboard half to your PC and press reset twice
 2. The keyboard should appear as a mass storage device
 3. Drag and drop the appropriate firmware file onto the storage device:
-   - Left half: `totem_left.uf2`
-   - Right half: `totem_right.uf2`
+   - Left half: `seeeduino_xiao_ble-totem_left.uf2`
+   - Right half: `seeeduino_xiao_ble-totem_right.uf2`
 
 ## KEYBOARD REFERENCE
 
