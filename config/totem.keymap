@@ -45,8 +45,12 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
-// Include the leader key module
-#include <zmk-leader-key/leader-key.dtsi>
+// Define HOST_OS as 2 for macOS
+#define HOST_OS 2
+// includes for zmk helper
+#include "zmk-helpers/helper.h"
+#include "zmk-helpers/key-labels/totem.h"
+#include "zmk-helpers/unicode-chars/czech.dtsi"
 
 #define BASE  0
 #define BASE2 1
@@ -62,29 +66,6 @@
 };
 
 / {
-    // Czech character definitions
-    keymap-aliases {
-        // Define Czech characters for easier understanding of sequences
-        c_hacek = C;      // č
-        s_hacek = S;      // š
-        r_hacek = R;      // ř
-        e_hacek = E;      // ě
-        z_hacek = Z;      // ž
-        d_hacek = D;      // ď
-        t_hacek = T;      // ť
-        n_hacek = N;      // ň
-        a_carka = A;      // á 
-        e_carka = E;      // é
-        i_carka = I;      // í
-        o_carka = O;      // ó
-        u_carka = U;      // ú
-        u_krouzek = K;    // ů (using K for kroužek)
-        y_carka = Y;      // ý
-        hacek = H;       // Modifier key for háček (ˇ)
-        carka = C;       // Modifier key for čárka/acute (´)
-        krouzek = K;     // Modifier key for kroužek (°)
-    };
-
     macros {
         // =======================================
         // === MAGIC KEY FUNCTIONALITY MACROS ====
@@ -384,40 +365,40 @@
             // Characters with multiple diacritic options use a roll (char + diacritic type)
             
             // č - hacek on c
-            c_hacek { sequence = <C>; bindings = <&kp RS(LC(N9))>; };
+            c_hacek { sequence = <C>; bindings = <&cs_cc>; };
             // š - hacek on s
-            s_hacek { sequence = <S>; bindings = <&kp RA(V)>; };
+            s_hacek { sequence = <S>; bindings = <&cs_sc>; };
             // ř - hacek on r
-            r_hacek { sequence = <R>; bindings = <&kp RA(N4)>; };
+            r_hacek { sequence = <R>; bindings = <&cs_rc>; };
             
             // e with diacritics - using rolls
-            e_hacek { sequence = <E H>; bindings = <&kp RA(N2)>; }; // ě
-            e_carka { sequence = <E C>; bindings = <&kp RA(E)>; };  // é
+            e_hacek { sequence = <E H>; bindings = <&cs_ec>; }; // ě
+            e_carka { sequence = <E C>; bindings = <&cs_ea>; };  // é
             
             // ž - hacek on z
-            z_hacek { sequence = <Z>; bindings = <&kp RA(Z)>; };
+            z_hacek { sequence = <Z>; bindings = <&cs_zc>; };
             // ď - hacek on d
-            d_hacek { sequence = <D>; bindings = <&kp RA(D)>; };
+            d_hacek { sequence = <D>; bindings = <&cs_dc>; };
             // ť - hacek on t
-            t_hacek { sequence = <T>; bindings = <&kp RA(T)>; };
+            t_hacek { sequence = <T>; bindings = <&cs_tc>; };
             // ň - hacek on n
-            n_hacek { sequence = <N>; bindings = <&kp RA(N)>; };
+            n_hacek { sequence = <N>; bindings = <&cs_nc>; };
             
             // a with diacritics
-            a_carka { sequence = <A>; bindings = <&kp RA(A)>; }; // á
+            a_carka { sequence = <A>; bindings = <&cs_aa>; }; // á
             
             // i with diacritics
-            i_carka { sequence = <I>; bindings = <&kp RA(I)>; }; // í
+            i_carka { sequence = <I>; bindings = <&cs_ia>; }; // í
             
             // o with diacritics
-            o_carka { sequence = <O>; bindings = <&kp RA(O)>; }; // ó
+            o_carka { sequence = <O>; bindings = <&cs_oa>; }; // ó
             
             // u with diacritics - using rolls
-            u_carka { sequence = <U C>; bindings = <&kp RA(U)>; };    // ú
-            u_krouzek { sequence = <U K>; bindings = <&kp RA(SEMI)>; }; // ů
+            u_carka { sequence = <U C>; bindings = <&cs_ua>; };    // ú
+            u_krouzek { sequence = <U K>; bindings = <&cs_ur>; }; // ů
             
             // y with diacritics
-            y_carka { sequence = <Y>; bindings = <&kp RA(Y)>; }; // ý
+            y_carka { sequence = <Y>; bindings = <&cs_ya>; }; // ý
         };
     };
 
@@ -437,7 +418,7 @@
 
         keymap {
                 compatible = "zmk,keymap";
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
                 base_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -511,7 +492,7 @@ label= "NAVI"                              ;
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 sim_layer {
@@ -537,7 +518,7 @@ label= "SYM"                               ;
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 adjust_layer {

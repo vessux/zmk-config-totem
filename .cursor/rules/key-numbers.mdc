@@ -3,5 +3,5 @@ description:
 globs: 
 alwaysApply: true
 ---
-This rule is helpful to whole coed base for referencing key nunbers in layouts
-Always reference [key_numbers.txt](mdc:key_numbers.txt) for keys location, keyboard layout and key numbers
+This rule is helpful to whole codebase for referencing key numbers in layouts
+Always reference [key-numbers.md](mdc:docs/key-numbers.md) for keys location, keyboard layout and key numbers
