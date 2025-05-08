@@ -73,6 +73,39 @@ Located in the right thumb cluster, this key provides intelligent repetition:
 
 For more details, see the comments in the `config/totem.keymap` file.
 
+## Czech Characters with Leader Key
+
+This keyboard layout includes a leader key feature for typing Czech characters with diacritical marks. The leader key is positioned at both left and right bottom corners of the keyboard.
+
+### How to use:
+1. Press and release the Czech leader key (labeled "CZ LEAD")
+2. Type the letter you want to add diacritics to, followed by the diacritic symbol:
+
+### Available Czech Characters:
+- **Háček (ˇ) characters:**
+  - `C G` → `č` (press C, then G)
+  - `S H` → `š` (press S, then H)
+  - `R R` → `ř` (press R, then R)
+  - `E E` → `ě` (press E, then E)
+  - `Z Z` → `ž` (press Z, then Z)
+  - `D D` → `ď` (press D, then D)
+  - `T T` → `ť` (press T, then T)
+  - `N N` → `ň` (press N, then N)
+
+- **Čárka (´) characters:**
+  - `A A` → `á` (press A, then A)
+  - `E E_C` → `é` (press E, then E)
+  - `I I` → `í` (press I, then I)
+  - `O O` → `ó` (press O, then O)
+  - `U U` → `ú` (press U, then U)
+  - `Y Y` → `ý` (press Y, then Y)
+
+- **Kroužek (°) character:**
+  - `U U_K` → `ů` (press U, then U)
+
+### Tip:
+For most characters, you simply press the leader key, then double-tap the character you want to add diacritics to.
+
 ## BUILD OPTIONS
 
 ### Cloud Build (GitHub Actions)

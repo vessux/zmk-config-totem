@@ -45,6 +45,9 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
+// Include the leader key module
+#include <zmk-leader-key/leader-key.dtsi>
+
 #define BASE  0
 #define BASE2 1
 #define NAV   2
@@ -59,6 +62,26 @@
 };
 
 / {
+    // Czech character definitions
+    keymap-aliases {
+        // Define Czech characters for easier understanding of sequences
+        c_hacek = G;      // č
+        s_hacek = H;      // š
+        r_hacek = R;      // ř
+        e_hacek = E;      // ě
+        z_hacek = Z;      // ž
+        d_hacek = D;      // ď
+        t_hacek = T;      // ť
+        n_hacek = N;      // ň
+        a_carka = A;      // á 
+        e_carka = E_C;    // é
+        i_carka = I;      // í
+        o_carka = O;      // ó
+        u_carka = U;      // ú
+        u_krouzek = U_K;  // ů
+        y_carka = Y;      // ý
+    };
+
     macros {
         // =======================================
         // === MAGIC KEY FUNCTIONALITY MACROS ====
@@ -348,6 +371,44 @@
             max-delay-ms = <300>;  // Slightly longer timeout for better usability
             defaults = <&key_repeat>;  // Default to standard repeat for unmatched keys
         };
+
+        // Leader key for Czech diacritics
+        cz: czech_leader {
+            compatible = "zmk,behavior-leader-key";
+            #binding-cells = <0>;
+            
+            // č - hacek on c
+            c_hacek { sequence = <C c_hacek>; bindings = <&kp RS(LC(N9))>; };
+            // š - hacek on s
+            s_hacek { sequence = <S s_hacek>; bindings = <&kp RA(V)>; };
+            // ř - hacek on r
+            r_hacek { sequence = <R r_hacek>; bindings = <&kp RA(N4)>; };
+            // ě - hacek on e
+            e_hacek { sequence = <E e_hacek>; bindings = <&kp RA(N2)>; };
+            // ž - hacek on z
+            z_hacek { sequence = <Z z_hacek>; bindings = <&kp RA(Z)>; };
+            // ď - hacek on d
+            d_hacek { sequence = <D d_hacek>; bindings = <&kp RA(D)>; };
+            // ť - hacek on t
+            t_hacek { sequence = <T t_hacek>; bindings = <&kp RA(T)>; };
+            // ň - hacek on n
+            n_hacek { sequence = <N n_hacek>; bindings = <&kp RA(N)>; };
+            
+            // á - acute on a
+            a_carka { sequence = <A a_carka>; bindings = <&kp RA(A)>; };
+            // é - acute on e
+            e_carka { sequence = <E e_carka>; bindings = <&kp RA(E)>; };
+            // í - acute on i
+            i_carka { sequence = <I i_carka>; bindings = <&kp RA(I)>; };
+            // ó - acute on o 
+            o_carka { sequence = <O o_carka>; bindings = <&kp RA(O)>; };
+            // ú - acute on u
+            u_carka { sequence = <U u_carka>; bindings = <&kp RA(U)>; };
+            // ů - ring on u
+            u_krouzek { sequence = <U u_krouzek>; bindings = <&kp RA(SEMI)>; };
+            // ý - acute on y
+            y_carka { sequence = <Y y_carka>; bindings = <&kp RA(Y)>; };
+        };
     };
 
     combos {
@@ -366,7 +427,7 @@
 
         keymap {
                 compatible = "zmk,keymap";
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
                 base_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -377,7 +438,7 @@ label= "BASE"                              ;
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃     A     ┃     S     ┃     D     ┃     F     ┃     G     ┃   ┃     H     ┃     J     ┃     K     ┃     L     ┃     ;     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃     Z     ┃     X     ┃     C     ┃     V     ┃     B     ┃   ┃     N     ┃     M     ┃     ,     ┃     .     ┃     /     ┃           ┃
+// ┃  CZ LEAD  ┃     Z     ┃     X     ┃     C     ┃     V     ┃     B     ┃   ┃     N     ┃     M     ┃     ,     ┃     .     ┃     /     ┃  CZ LEAD  ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                     ┃    DEL    ┃   SPACE   ┃    TAB    ┃   ┃   ESCAPE  ┃   ENTER   ┃   BSPC    ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -386,7 +447,7 @@ label= "BASE"                              ;
 
                 &kp Q       &kp W       &kp E       &kp R         &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
                 &mt LGUI A  &mt LALT S  &mt LCTRL D &mt LSHFT F   &kp G           &kp H       &mt RSHFT J &mt RCTRL K &mt RALT L  &mt RGUI SEMI
-    &kp Z       &kp Z       &kp X       &kp C       &kp V         &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &kp FSLH
+    &cz         &kp Z       &kp X       &kp C       &kp V         &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &cz
                                         &kp DEL     &lt NAV SPACE &kp TAB         &kp ESC     &lt SYM RET &kp BSPC
                         >;
                 };
@@ -400,7 +461,7 @@ label= "BASE2"                             ;
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃     S     ┃     T     ┃     R     ┃     D     ┃     Y     ┃   ┃     F     ┃     N     ┃     E     ┃     A     ┃     I     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃     X     ┃     K     ┃     J     ┃     G     ┃     W     ┃   ┃     Z     ┃     H     ┃     '     ┃     ?     ┃     .     ┃           ┃
+// ┃  CZ LEAD  ┃     X     ┃     K     ┃     J     ┃     G     ┃     W     ┃   ┃     Z     ┃     H     ┃     '     ┃     ?     ┃     .     ┃  CZ LEAD  ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                     ┃    DEL    ┃   SPACE   ┃    TAB    ┃   ┃ SMARTREP  ┃   ENTER   ┃   BSPC    ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -409,12 +470,12 @@ label= "BASE2"                             ;
 
                 &kp V       &kp M       &kp L       &kp C         &kp P           &kp B       &magic_key  &kp U       &kp O       &kp COMMA
                 &kp S       &kp T       &kp R       &kp D         &kp Y           &kp F       &kp N       &kp E       &kp A       &kp I
-    &kp X       &kp X       &kp K       &kp J       &kp G         &kp W           &kp Z       &kp H       &kp SQT     &kp QMARK   &kp DOT     &kp BSLH
+    &cz         &kp X       &kp K       &kp J       &kp G         &kp W           &kp Z       &kp H       &kp SQT     &kp QMARK   &kp DOT     &cz
                                         &trans      &trans        &trans          &smart_repeat &trans    &trans
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 nav_layer {
