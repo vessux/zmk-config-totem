@@ -72,7 +72,6 @@
         // =======================================
         
         the_macro: the_macro {
-            label = "the_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -81,7 +80,6 @@
         };
 
         but_macro: but_macro {
-            label = "but_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -90,7 +88,6 @@
         };
 
         before_macro: before_macro {
-            label = "before_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -99,7 +96,6 @@
         };
 
         ent_macro: ent_macro {
-            label = "ent_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -108,7 +104,6 @@
         };
 
         ion_macro: ion_macro {
-            label = "ion_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -117,7 +112,6 @@
         };
 
         on_macro: on_macro {
-            label = "on_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -126,7 +120,6 @@
         };
 
         ust_macro: ust_macro {
-            label = "ust_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -135,7 +128,6 @@
         };
 
         ment_macro: ment_macro {
-            label = "ment_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -144,7 +136,6 @@
         };
 
         er_macro: er_macro {
-            label = "er_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -153,7 +144,6 @@
         };
 
         which_macro: which_macro {
-            label = "which_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -162,7 +152,6 @@
         };
 
         es_macro: es_macro {
-            label = "es_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -175,7 +164,6 @@
         // =======================================
         
         ing_macro: ing_macro {
-            label = "ing_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -185,7 +173,6 @@
 
         // Magic Sturdy repeat key override macros
         nd_macro: nd_macro {
-            label = "nd_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -194,7 +181,6 @@
         };
 
         ng_macro: ng_macro {
-            label = "ng_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -203,7 +189,6 @@
         };
 
         ou_macro: ou_macro {
-            label = "ou_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -212,7 +197,6 @@
         };
 
         because_macro: because_macro {
-            label = "because_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -221,7 +205,6 @@
         };
 
         would_macro: would_macro {
-            label = "would_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -230,7 +213,6 @@
         };
 
         and_macro: and_macro {
-            label = "and_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -239,7 +221,6 @@
         };
 
         org_macro: org_macro {
-            label = "org_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -248,7 +229,6 @@
         };
 
         for_macro: for_macro {
-            label = "for_macro";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -264,7 +244,6 @@
         
         magic_key: magic_key {
             compatible = "zmk,behavior-antecedent-morph";
-            label = "MAGIC_KEY";
             #binding-cells = <0>;
             
             /* Magic Key Mappings
@@ -290,7 +269,7 @@
                 
             antecedents = <A B C D E F G H I J K L M N O P Q R S T U V W X Y Z COMMA DOT FSLH MINUS EQUAL SPACE>;
                 
-            max-delay-ms = <250>;
+            max-delay-ms = <500>;
             defaults = <&kp N>;  // Default output is N if no matching antecedent
         };
 
@@ -301,7 +280,6 @@
         // Built-in ZMK key repeat behavior - used for standard key repetition
         key_repeat: key_repeat {
             compatible = "zmk,behavior-key-repeat";
-            label = "KEY_REPEAT";
             #binding-cells = <0>;
             // Optionally configure usage pages to include consumer keys
             usage-pages = <HID_USAGE_KEY HID_USAGE_CONSUMER>;
@@ -310,7 +288,6 @@
         // Enhanced repeat key with context-aware output for Magic Sturdy
         smart_repeat: smart_repeat {
             compatible = "zmk,behavior-antecedent-morph";
-            label = "SMART_REPEAT";
             #binding-cells = <0>;
             
             /*
@@ -349,10 +326,10 @@
                 LCTRL LSHFT LALT LGUI
                 
                 // Default fallback
-                0
+                LT4
             >;
                 
-            max-delay-ms = <300>;  // Slightly longer timeout for better usability
+            max-delay-ms = <500>;  // Slightly longer timeout for better usability
             defaults = <&key_repeat>;  // Default to standard repeat for unmatched keys
         };
 
@@ -406,19 +383,19 @@
             compatible = "zmk,combos";
             combo_esc {
                 timeout-ms = <50>;
-                key-positions = <0 1>;
+                key-positions = <LT4 LT3>;
                 bindings = <&kp ESC>;
             };
             combo_base_toggle {
                 timeout-ms = <50>;
-                key-positions = <20 31>;
+                key-positions = <LB5 RB5>;
                 bindings = <&tog BASE2>;
             };
     };
 
         keymap {
                 compatible = "zmk,keymap";
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
                 base_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -460,7 +437,7 @@ label= "BASE2"                             ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &kp V       &kp M       &kp L       &kp C         &kp P           &kp B       &magic_key  &kp U       &kp O       &kp COMMA
-                &kp S       &kp T       &kp R       &kp D         &kp Y           &kp F       &kp N       &kp E       &kp A       &kp I
+                &mt LGUI S  &mt LALT T  &mt LCTRL R &mt LSHFT D   &kp Y           &kp F       &mt RSHFT N &mt RCTRL E &mt RALT A  &mt RGUI I
     &cz         &kp X       &kp K       &kp J       &kp G         &kp W           &kp Z       &kp H       &kp SQT     &kp QMARK   &kp DOT     &cz
                                         &trans      &trans        &trans          &smart_repeat &trans    &trans
                         >;
