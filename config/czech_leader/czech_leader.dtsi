@@ -1,0 +1,6 @@
+// =======================================
+// === CZECH LEADER FUNCTIONALITY =========
+// =======================================
+// This file includes all components related to the Czech Leader feature
+
+#include "czech_leader_behavior.dtsi"  // Czech leader key behavior definition 

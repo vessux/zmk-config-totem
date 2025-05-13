@@ -1,0 +1,7 @@
+// =======================================
+// === SMART REPEAT FUNCTIONALITY =========
+// =======================================
+// This file includes all components related to the Smart Repeat feature
+
+#include "smart_repeat_macros.dtsi"  // Smart repeat word suffix macros
+#include "smart_repeat_behavior.dtsi"  // Smart repeat behavior definition 

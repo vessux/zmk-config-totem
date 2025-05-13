@@ -1,0 +1,36 @@
+// =======================================
+// === MAGIC KEY BEHAVIOR ================
+// =======================================
+
+behaviors {
+    magic_key: magic_key {
+        compatible = "zmk,behavior-antecedent-morph";
+        #binding-cells = <0>;
+        
+        /* Magic Key Mappings
+         * ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+         * ┃ First Key  ┃ Magic Output ┃   ┃ First Key  ┃ Magic Output ┃   ┃ First Key  ┃ Magic Output ┃
+         * ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
+         * ┃ A          ┃ O            ┃   ┃ N          ┃ ION          ┃   ┃ [          ┃ ]            ┃
+         * ┃ B          ┃ EFORE        ┃   ┃ O          ┃ A            ┃   ┃ ]          ┃ [            ┃
+         * ┃ C          ┃ Y            ┃   ┃ P          ┃ Y            ┃   ┃ <          ┃ >            ┃
+         * ┃ D          ┃ Y            ┃   ┃ Q          ┃ (none)       ┃   ┃ >          ┃ <            ┃
+         * ┃ E          ┃ U            ┃   ┃ R          ┃ L            ┃   ┃ {          ┃ }            ┃
+         * ┃ F          ┃ (none)       ┃   ┃ S          ┃ K            ┃   ┃ }          ┃ {            ┃
+         * ┃ G          ┃ Y            ┃   ┃ T          ┃ MENT         ┃   ┃ ,          ┃  BUT         ┃
+         * ┃ H          ┃ (none)       ┃   ┃ U          ┃ E            ┃   ┃ .          ┃ \            ┃
+         * ┃ I          ┃ ON           ┃   ┃ V          ┃ ER           ┃   ┃ /          ┃ (none)       ┃
+         * ┃ J          ┃ UST          ┃   ┃ W          ┃ HICH         ┃   ┃ -          ┃ >            ┃
+         * ┃ K          ┃ S            ┃   ┃ X          ┃ ES           ┃   ┃ =          ┃ >            ┃
+         * ┃ L          ┃ K            ┃   ┃ Y          ┃ P            ┃   ┃ Space      ┃ THE          ┃
+         * ┃ M          ┃ ENT          ┃   ┃ Z          ┃ (none)       ┃   ┃ ^ (itself) ┃ N            ┃
+         * ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛
+         */
+        bindings = <&kp O>, <&before_macro>, <&kp Y>, <&kp Y>, <&kp U>, <&trans>, <&kp Y>, <&trans>, <&on_macro>, <&ust_macro>, <&kp S>, <&kp K>, <&ent_macro>, <&ion_macro>, <&kp A>, <&kp Y>, <&trans>, <&kp L>, <&kp K>, <&ment_macro>, <&kp E>, <&er_macro>, <&which_macro>, <&es_macro>, <&kp P>, <&trans>, <&but_macro>, <&kp BSLH>, <&trans>, <&kp GT>, <&kp GT>, <&the_macro>, <&kp N>;
+            
+        antecedents = <A B C D E F G H I J K L M N O P Q R S T U V W X Y Z COMMA DOT FSLH MINUS EQUAL SPACE>;
+            
+        max-delay-ms = <500>;
+        defaults = <&kp N>;  // Default output is N if no matching antecedent
+    };
+}; 

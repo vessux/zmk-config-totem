@@ -1,0 +1,61 @@
+// =======================================
+// === SMART REPEAT BEHAVIORS ============
+// =======================================
+
+behaviors {
+    // Built-in ZMK key repeat behavior - used for standard key repetition
+    key_repeat: key_repeat {
+        compatible = "zmk,behavior-key-repeat";
+        #binding-cells = <0>;
+        // Optionally configure usage pages to include consumer keys
+        usage-pages = <HID_USAGE_KEY HID_USAGE_CONSUMER>;
+    };
+
+    // Enhanced repeat key with context-aware output for Magic Sturdy
+    smart_repeat: smart_repeat {
+        compatible = "zmk,behavior-antecedent-morph";
+        #binding-cells = <0>;
+        
+        /*
+         * Smart Repeat Mappings
+         * ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+         * ┃ First Key  ┃ Smart Output ┃   ┃ First Key      ┃ Smart Output ┃   ┃ First Key  ┃ Smart Output ┃
+         * ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
+         * ┃ A          ┃ ND           ┃   ┃ LEFT           ┃ RIGHT        ┃   ┃ LBRC       ┃ RBRC         ┃
+         * ┃ I          ┃ NG           ┃   ┃ RIGHT          ┃ LEFT         ┃   ┃ RBRC       ┃ LBRC         ┃
+         * ┃ Y          ┃ OU           ┃   ┃ DOWN           ┃ UP           ┃   ┃ LPAR       ┃ RPAR         ┃
+         * ┃ N          ┃ F            ┃   ┃ UP             ┃ DOWN         ┃   ┃ RPAR       ┃ LPAR         ┃
+         * ┃ B          ┃ ECAUSE       ┃   ┃ END            ┃ HOME         ┃   ┃ LT         ┃ GT           ┃
+         * ┃ W          ┃ OULD         ┃   ┃ HOME           ┃ END          ┃   ┃ GT         ┃ LT           ┃
+         * ┃ ,          ┃  AND         ┃   ┃ PG_DN          ┃ PG_UP        ┃   ┃ LBKT       ┃ RBKT         ┃
+         * ┃ .          ┃ ORG          ┃   ┃ PG_UP          ┃ PG_DN        ┃   ┃ RBKT       ┃ LBKT         ┃
+         * ┃ Space      ┃ FOR          ┃   ┃ SQT            ┃ DQT          ┃   ┃ Modifiers  ┃ Repeat       ┃
+         * ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┃ DQT            ┃ SQT          ┃   ┃ Others     ┃ Std. Repeat  ┃
+         *                                 ┗━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛
+         */
+        bindings = <&nd_macro>, <&ng_macro>, <&ou_macro>, <&kp F>, <&because_macro>, <&would_macro>, <&and_macro>, <&org_macro>, <&for_macro>, <&kp RIGHT>, <&kp LEFT>, <&kp UP>, <&kp DOWN>, <&kp HOME>, <&kp END>, <&kp PAGE_UP>, <&kp PAGE_DOWN>, <&kp RBRC>, <&kp LBRC>, <&kp RPAR>, <&kp LPAR>, <&kp GT>, <&kp LT>, <&kp RBKT>, <&kp LBKT>, <&kp DQT>, <&kp SQT>, <&key_repeat>, <&key_repeat>, <&key_repeat>, <&key_repeat>, <&key_repeat>;
+            
+        antecedents = <
+            // ---- EXACT MAGIC STURDY OVERRIDES ----
+            A I Y N B W COMMA DOT SPACE
+            
+            // Navigation key pairs
+            LEFT RIGHT DOWN UP END HOME PAGE_DOWN PAGE_UP
+            
+            // Brackets and parentheses
+            LBRC RBRC LPAR RPAR LT GT LBKT RBKT
+            
+            // Quotes
+            SQT DQT
+            
+            // For modifier keys support
+            LCTRL LSHFT LALT LGUI
+            
+            // Default fallback
+            LT4
+        >;
+            
+        max-delay-ms = <500>;  // Slightly longer timeout for better usability
+        defaults = <&key_repeat>;  // Default to standard repeat for unmatched keys
+    };
+}; 

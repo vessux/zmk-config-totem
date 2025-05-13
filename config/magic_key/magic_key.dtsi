@@ -1,0 +1,7 @@
+// =======================================
+// === MAGIC KEY FUNCTIONALITY ============
+// =======================================
+// This file includes all components related to the Magic Key feature
+
+#include "magic_key_macros.dtsi"  // Magic key word ending macros
+#include "magic_key_behavior.dtsi"  // Magic key behavior definition 

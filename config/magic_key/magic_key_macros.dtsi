@@ -1,0 +1,93 @@
+// =======================================
+// === MAGIC KEY FUNCTIONALITY MACROS ====
+// =======================================
+
+macros {
+    the_macro: the_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp T &kp H &kp E>;
+    };
+
+    but_macro: but_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp SPACE &kp B &kp U &kp T>;
+    };
+
+    before_macro: before_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp E &kp F &kp O &kp R &kp E>;
+    };
+
+    ent_macro: ent_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp E &kp N &kp T>;
+    };
+
+    ion_macro: ion_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp I &kp O &kp N>;
+    };
+
+    on_macro: on_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp O &kp N>;
+    };
+
+    ust_macro: ust_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp U &kp S &kp T>;
+    };
+
+    ment_macro: ment_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp M &kp E &kp N &kp T>;
+    };
+
+    er_macro: er_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp E &kp R>;
+    };
+
+    which_macro: which_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp H &kp I &kp C &kp H>;
+    };
+
+    es_macro: es_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp E &kp S>;
+    };
+}; 

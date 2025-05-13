@@ -1,0 +1,78 @@
+// =======================================
+// === SMART REPEAT FUNCTIONALITY MACROS =
+// =======================================
+
+macros {
+    ing_macro: ing_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp I &kp N &kp G>;
+    };
+
+    // Magic Sturdy repeat key override macros
+    nd_macro: nd_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp N &kp D>;
+    };
+
+    ng_macro: ng_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp N &kp G>;
+    };
+
+    ou_macro: ou_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp O &kp U>;
+    };
+
+    because_macro: because_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp E &kp C &kp A &kp U &kp S &kp E>;
+    };
+
+    would_macro: would_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp O &kp U &kp L &kp D>;
+    };
+
+    and_macro: and_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp SPACE &kp A &kp N &kp D>;
+    };
+
+    org_macro: org_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp O &kp R &kp G>;
+    };
+
+    for_macro: for_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        wait-ms = <0>;
+        tap-ms = <0>;
+        bindings = <&macro_tap &kp F &kp O &kp R>;
+    };
+}; 

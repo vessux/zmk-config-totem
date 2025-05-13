@@ -1,0 +1,50 @@
+// =======================================
+// === CZECH LEADER KEY BEHAVIOR =========
+// =======================================
+
+behaviors {
+    // Leader key for Czech diacritics with rolling approach
+    cz: czech_leader {
+        compatible = "zmk,behavior-leader-key";
+        #binding-cells = <0>;
+        
+        // Characters with single diacritic options use a single keypress
+        // Characters with multiple diacritic options use a roll (char + diacritic type)
+        
+        // č - hacek on c
+        c_hacek { sequence = <C>; bindings = <&cs_cc>; };
+        // š - hacek on s
+        s_hacek { sequence = <S>; bindings = <&cs_sc>; };
+        // ř - hacek on r
+        r_hacek { sequence = <R>; bindings = <&cs_rc>; };
+        
+        // e with diacritics - using rolls
+        e_hacek { sequence = <E H>; bindings = <&cs_ec>; }; // ě
+        e_carka { sequence = <E C>; bindings = <&cs_ea>; };  // é
+        
+        // ž - hacek on z
+        z_hacek { sequence = <Z>; bindings = <&cs_zc>; };
+        // ď - hacek on d
+        d_hacek { sequence = <D>; bindings = <&cs_dc>; };
+        // ť - hacek on t
+        t_hacek { sequence = <T>; bindings = <&cs_tc>; };
+        // ň - hacek on n
+        n_hacek { sequence = <N>; bindings = <&cs_nc>; };
+        
+        // a with diacritics
+        a_carka { sequence = <A>; bindings = <&cs_aa>; }; // á
+        
+        // i with diacritics
+        i_carka { sequence = <I>; bindings = <&cs_ia>; }; // í
+        
+        // o with diacritics
+        o_carka { sequence = <O>; bindings = <&cs_oa>; }; // ó
+        
+        // u with diacritics - using rolls
+        u_carka { sequence = <U C>; bindings = <&cs_ua>; };    // ú
+        u_krouzek { sequence = <U K>; bindings = <&cs_ur>; }; // ů
+        
+        // y with diacritics
+        y_carka { sequence = <Y>; bindings = <&cs_ya>; }; // ý
+    };
+}; 

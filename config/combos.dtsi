@@ -1,0 +1,51 @@
+combos {
+    compatible = "zmk,combos";
+    
+    combo_esc {
+        timeout-ms = <50>;
+        key-positions = <LT4 LT3>;
+        bindings = <&kp ESC>;
+    };
+    
+    combo_base_toggle {
+        timeout-ms = <50>;
+        key-positions = <LB5 RB5>;
+        bindings = <&tog BASE2>;
+    };
+    
+    // Czech leader combos - Choose one or more options that work best for you
+    
+    // Option 1: Left-hand home row middle finger + index finger (D+F)
+    combo_czech_leader_left {
+        timeout-ms = <100>;
+        key-positions = <LM2 LM1>;  // D + F keys
+        bindings = <&cz>;
+    };
+    
+    // Option 2: Right-hand home row middle finger + index finger (K+J)
+    combo_czech_leader_right {
+        timeout-ms = <100>;
+        key-positions = <RM2 RM1>;  // K + J keys
+        bindings = <&cz>;
+    };
+    
+    // Option 3: Left and right index fingers (F+J)
+    // Uncomment if you prefer this option
+    /* 
+    combo_czech_leader_both {
+        timeout-ms = <100>;
+        key-positions = <LM1 RM1>;  // F + J keys
+        bindings = <&cz>;
+    };
+    */
+    
+    // Option 4: Space bar + left thumb key
+    // Uncomment if you prefer this option
+    /*
+    combo_czech_leader_thumbs {
+        timeout-ms = <100>;
+        key-positions = <LH1 LH0>;  // Left thumb keys
+        bindings = <&cz>;
+    };
+    */
+}; 
