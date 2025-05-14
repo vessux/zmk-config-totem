@@ -24,6 +24,7 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
+#include "symbol_macros.dtsi"
 
 // Define HOST_OS as 2 for macOS
 #define HOST_OS 2
@@ -37,7 +38,8 @@
 #define BASE2 1
 #define NAV   2
 #define SYM   3
-#define ADJ   4
+#define CMD   4
+#define ADJ   5
 
 // Customize default behavior settings
 &mt {
@@ -61,6 +63,7 @@
         #include "layers/base2_layer.dtsi"
         #include "layers/nav_layer.dtsi"
         #include "layers/sym_layer.dtsi"
+        #include "layers/command_layer.dtsi"
         #include "layers/adjust_layer.dtsi"
     };
 }; 
