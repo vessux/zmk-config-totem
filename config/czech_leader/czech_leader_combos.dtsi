@@ -1,17 +1,9 @@
-combos {
+// =======================================
+// === CZECH LEADER COMBOS ================
+// =======================================
+
+czech_leader_combos {
     compatible = "zmk,combos";
-    
-    combo_esc {
-        timeout-ms = <50>;
-        key-positions = <LT4 LT3>;
-        bindings = <&kp ESC>;
-    };
-    
-    combo_base_toggle {
-        timeout-ms = <50>;
-        key-positions = <LB5 RB5>;
-        bindings = <&tog BASE2>;
-    };
     
     // Czech leader combos - Choose one or more options that work best for you
     
