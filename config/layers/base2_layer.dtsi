@@ -15,7 +15,7 @@ label= "BASE2"                             ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &kp V       &kp M       &kp L       &kp C         &kp P           &kp B       &magic_key  &kp U       &kp O       &kp COMMA
-                &mt LGUI S  &mt LALT T  &mt LCTRL R &mt LSHFT D   &kp Y           &kp F       &mt RSHFT N &mt RCTRL E &mt RALT A  &mt RGUI I
+                &hml LGUI S &hml LALT T &hml LCTRL R &hml LSHFT D &kp Y           &kp F       &hmr RSHFT N &hmr RCTRL E &hmr RALT A &hmr RGUI I
     &cz         &kp X       &kp K       &kp J       &kp G         &kp W           &kp Z       &kp H       &kp SQT     &kp QMARK   &kp DOT     &cz
                                         &trans      &trans        &trans          &smart_repeat &trans    &trans
                         >;

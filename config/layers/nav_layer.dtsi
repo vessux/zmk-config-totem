@@ -15,7 +15,7 @@ label= "NAVI"                              ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &none       &kp LG(LEFT) &kp UP     &kp LG(RIGHT) &kp LBRC   &kp RBRC    &kp N7      &kp N8      &kp N9      &kp PLUS
-                &kp LGUI    &mt LALT LEFT &mt LCTRL DOWN &mt LSHFT RIGHT &kp LBKT        &kp RBKT    &mt RSHFT N4 &mt RCTRL N5 &mt RALT N6 &mt RGUI MINUS
+                &kp LGUI    &hml LALT LEFT &hml LCTRL DOWN &hml LSHFT RIGHT &kp LBKT     &kp RBKT    &hmr RSHFT N4 &hmr RCTRL N5 &hmr RALT N6 &hmr RGUI MINUS
     &none       &none       &kp PG_UP   &caps_word  &kp PG_DN   &kp LPAR        &kp RPAR    &kp N1      &kp N2      &kp N3      &kp STAR     &none      
                                         &trans      &trans      &trans          &mo ADJ     &kp N0      &kp DOT      
                         >;

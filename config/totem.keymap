@@ -53,7 +53,41 @@
     continue-list = <UNDERSCORE MINUS BACKSPACE DELETE>;
 };
 
+// Define key positions based on the Totem layout
+// This helps define which keys are on which hand for hold-trigger positions
+#define KEYS_L LT4 LT3 LT2 LT1 LT0 LM4 LM3 LM2 LM1 LM0 LB5 LB4 LB3 LB2 LB1 // left-hand keys
+#define KEYS_R RT0 RT1 RT2 RT3 RT4 RM0 RM1 RM2 RM3 RM4 RB0 RB1 RB2 RB3 RB4 // right-hand keys
+#define THUMBS LH2 LH1 LH0 RH0 RH1 RH2 // thumb keys
+
 / {
+    // Timeless homerow mods for left hand
+    behaviors {
+        hml: homerow_mods_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <KEYS_R THUMBS>;
+            hold-trigger-on-release;
+        };
+
+        // Timeless homerow mods for right hand
+        hmr: homerow_mods_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <KEYS_L THUMBS>;
+            hold-trigger-on-release;
+        };
+    };
+
     // Import all modular components by functionality
     #include "magic_key/magic_key.dtsi"        // Magic Key functionality
     #include "smart_repeat/smart_repeat.dtsi"  // Smart Repeat functionality
