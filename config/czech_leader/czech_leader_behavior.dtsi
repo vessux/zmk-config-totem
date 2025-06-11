@@ -18,9 +18,9 @@ behaviors {
         // ř - hacek on r
         r_hacek { sequence = <R>; bindings = <&cs_rc>; };
         
-        // e with diacritics - using rolls
-        e_hacek { sequence = <E H>; bindings = <&cs_ec>; }; // ě
-        e_carka { sequence = <E C>; bindings = <&cs_ea>; };  // é
+        // e with diacritics - simplified
+        e_carka { sequence = <E>; bindings = <&cs_ea>; };  // é (leader+e)
+        e_hacek { sequence = <F>; bindings = <&cs_ec>; }; // ě (leader+f)
         
         // ž - hacek on z
         z_hacek { sequence = <Z>; bindings = <&cs_zc>; };
@@ -40,9 +40,9 @@ behaviors {
         // o with diacritics
         o_carka { sequence = <O>; bindings = <&cs_oa>; }; // ó
         
-        // u with diacritics - using rolls
-        u_carka { sequence = <U C>; bindings = <&cs_ua>; };    // ú
-        u_krouzek { sequence = <U K>; bindings = <&cs_ur>; }; // ů
+        // u with diacritics - simplified
+        u_krouzek { sequence = <U>; bindings = <&cs_ur>; }; // ů (leader+u)
+        u_carka { sequence = <J>; bindings = <&cs_ua>; };    // ú (leader+j)
         
         // y with diacritics
         y_carka { sequence = <Y>; bindings = <&cs_ya>; }; // ý
