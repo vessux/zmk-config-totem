@@ -7,6 +7,7 @@ behaviors {
     cz: czech_leader {
         compatible = "zmk,behavior-leader-key";
         #binding-cells = <0>;
+        ignore-keys = <LSHFT RSHFT>;
         
         // Characters with single diacritic options use a single keypress
         // Characters with multiple diacritic options use a roll (char + diacritic type)
@@ -21,7 +22,7 @@ behaviors {
         // e with diacritics - simplified
         e_carka { sequence = <E>; bindings = <&cs_ea>; };  // é (leader+e)
         e_hacek { sequence = <F>; bindings = <&cs_ec>; }; // ě (leader+f)
-        
+
         // ž - hacek on z
         z_hacek { sequence = <Z>; bindings = <&cs_zc>; };
         // ď - hacek on d
@@ -47,4 +48,4 @@ behaviors {
         // y with diacritics
         y_carka { sequence = <Y>; bindings = <&cs_ya>; }; // ý
     };
-}; 
+};
